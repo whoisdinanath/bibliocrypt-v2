@@ -17,7 +17,7 @@
 #include <globalVars.hpp>
 #include <gl-window/mainWindow.hpp>
 #include <gl-window/errorWindow.hpp>
-#include <gl-window/bookWindow.hpp>
+#include <gl-window/informationWindow.hpp>
 #include <gl-window/transactionWindow.hpp>
 #include <gl-window/libraryWindow.hpp>
 #include <gl-window/blockchainWindow.hpp>

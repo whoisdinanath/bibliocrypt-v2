@@ -30,7 +30,7 @@ void title_section()
     {
         stateVars::show_library_window = true;
         stateVars::show_initial_window = false;
-        stateVars::show_books_window = false;
+        stateVars::show_information_window = false;
         stateVars::show_main_window = false;
         stateVars::show_transactions_window = false;
         stateVars::show_blockchain_window = false;
@@ -38,11 +38,13 @@ void title_section()
     ImGui::SameLine();
     // blue color for active
 
-    if (ImGui::Button("Books"))
+    if (ImGui::Button("Informations"))
     {
         // change the buttons background color
 
-        stateVars::show_books_window = true;
+        stateVars::show_information_window = true;
+        stateVars::show_book_tab = true;
+        stateVars::show_user_tab = false;
         stateVars::show_main_window = false;
         stateVars::show_initial_window = false;
         stateVars::show_library_window = false;
@@ -59,7 +61,7 @@ void title_section()
         stateVars::show_initial_window = false;
         stateVars::show_library_window = false;
         stateVars::show_blockchain_window = false;
-        stateVars::show_books_window = false;
+        stateVars::show_information_window = false;
     }
 
     // set to same line
@@ -70,7 +72,7 @@ void title_section()
         stateVars::show_blockchain_window = true;
         stateVars::show_initial_window = false;
         stateVars::show_library_window = false;
-        stateVars::show_books_window = false;
+        stateVars::show_information_window = false;
         stateVars::show_transactions_window = false;
     }
     ImGui::PopStyleColor();

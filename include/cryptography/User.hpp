@@ -4,6 +4,15 @@
 #include <vector>
 #include <networking/Json.hpp>
 
+#include <iostream>
+#include <vector>
+#include <random>
+#include <cryptography/base64.h>
+#include <cmath>
+#include <cryptography/sha256.h>
+#include <fstream>
+#include <regex>
+
 using json = nlohmann::json;
 
 long long int decrypt(int encrpyted_text);

@@ -42,7 +42,6 @@ void library_window()
         std::cout << "BUF: " << buf << std::endl;
     }
     spaceSection(3);
-    separatorSection(2);
 
     // 4 vertical rectangular boxes of size 1/4 of the window in same line
     // each box will have a button and a text

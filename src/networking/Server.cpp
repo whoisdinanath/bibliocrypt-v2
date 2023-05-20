@@ -223,15 +223,35 @@ void TcpServer::buildResponse(std::string request)
         }
         else if (request_json["query"].get<std::string>() == "add_transaction")
         {
-            std::cout << "Query Recieved" << std::endl;
-            Transaction transaction = Transaction(request_json["transaction"]);
-            Chain::m_transactionPool.push_back(transaction);
-            std::vector<int> encodedQuery = transaction.getEncodedQuery();
-            std::vector<std::string> decrypted = SmartContract::getqueryfromenc(encodedQuery);
-            SmartContract::update_files(decrypted);
-            response_json["status_code"] = "777";
-            response_json["message"] = "Transaction added to pool";
-            response = response_json.dump();
+            if (request_json["type"].get<std::string>() == "library")
+            {
+                std::cout << "Query Recieved" << std::endl;
+                Transaction transaction = Transaction(request_json["transaction"]);
+                Chain::m_transactionPool.push_back(transaction);
+                std::vector<int> encodedQuery = transaction.getEncodedQuery();
+                std::vector<std::string> decrypted = SmartContract::getqueryfromenc(encodedQuery);
+                SmartContract::update_files(decrypted);
+                response_json["status_code"] = "777";
+                response_json["message"] = "Transaction added to pool";
+                response = response_json.dump();
+            }
+            else if (request_json["type"].get<std::string>() == "user")
+            {
+                std::cout << "Query Recieved" << std::endl;
+                Transaction transaction = Transaction(request_json["transaction"]);
+                Chain::m_transactionPool.push_back(transaction);
+
+                response_json["status_code"] = "777";
+                response_json["message"] = "Transaction added to pool";
+                response = response_json.dump();
+            }
+            else
+            {
+                response_json["status_code"] = "101";
+                response_json["message"] = "Invalid transaction type";
+                response = response_json.dump();
+            }
+
             // Chain::m_user_data = read_user_data("./assets/data.csv");
             // Chain::m_book_data = read_book_data("./assets/book.csv");
         }

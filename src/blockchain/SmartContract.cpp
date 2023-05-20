@@ -11,7 +11,6 @@ using namespace std;
 
 bool SmartContract::isISBNValid(const std::string &isbn)
 {
-
     std::string stripped;
     for (char c : isbn)
     {

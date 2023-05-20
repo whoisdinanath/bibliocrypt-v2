@@ -13,7 +13,7 @@ void blockchain_window()
     // // ImGui::PopFont();
 
     // // text input
-    spaceSection(3);
+    spaceSection(10);
     // separatorSection(2);
     // spaceSection(3);
     // 4 vertical rectangular boxes of size 1/4 of the window in same line
@@ -59,33 +59,6 @@ void blockchain_window()
         ImGui::SameLine();
     }
 
-    ImGui::EndChild();
-    spaceSection(3);
-    ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Users").x) / 2);
-    ImGui::Text("Users");
-    spaceSection(3);
-    // begin child whose size is adjusted according to the content inside it
-    ImGui::BeginChild("Users");
-    ImGui::SetWindowSize(ImVec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight() / 1.5f));
-
-    ImGui::Columns(2, "HEADINGS");
-    ImGui::Separator();
-    ImGui::TextColored(ImVec4(1, 1, 0, 1), "USER ADDRESS");
-    ImGui::NextColumn();
-    ImGui::TextColored(ImVec4(1, 1, 0, 1), "OWNERSHIP ADDRESS");
-    separatorSection(2);
-    spaceSection(3);
-
-    for (int i = 1; i < int(globalVars::m_user_data.size()); i++)
-    {
-        ImGui::NextColumn();
-        ImGui::Text("%s", (globalVars::m_user_data[i][2]).c_str());
-        ImGui::NextColumn();
-        ImGui::Text("%s", (globalVars::m_user_data[i][4]).c_str());
-
-        separatorSection(2);
-        spaceSection(1);
-    }
     ImGui::EndChild();
 
     ImGui::End();

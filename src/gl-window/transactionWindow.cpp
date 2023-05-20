@@ -53,17 +53,34 @@ void transaction_window()
         ImGui::Text("%s", (i.representation()).c_str());
         if (ImGui::IsItemHovered())
         {
+
             ImGui::BeginTooltip();
-            ImGui::Text("%s", (
-                                  "Transaction ID: " + i.representation() + "\n" +
-                                  "Book Hash: " + i.getUpdatedBookHash() + "\n" +
-                                  "Data Hash: " + i.getUpdatedCertHash() + "\n" +
-                                  "Sender: " + query[4] + "\n" +
-                                  "Query: " + query[0] + "\n" +
-                                  "Book ISBN: " + query[1] + "\n" +
-                                  //   "Ownership ID: " + query[4] + "\n" +
-                                  "Timestamp: " + *(query.end() - 2) + "\n")
-                                  .c_str());
+            if (query[0] == "GET" || query[0] == "GIVE" || query[0] == "DONATE")
+            {
+                ImGui::Text("%s", (
+                                      "Transaction ID: " + i.representation() + "\n" +
+                                      "Book Hash: " + i.getUpdatedBookHash() + "\n" +
+                                      "Data Hash: " + i.getUpdatedCertHash() + "\n" +
+                                      "Type: " + "LIBRARY" + "\n" +
+                                      "Sender: " + query[4] + "\n" +
+                                      "Query: " + query[0] + "\n" +
+                                      "Book ISBN: " + query[1] + "\n" +
+                                      //   "Ownership ID: " + query[4] + "\n" +
+                                      "Timestamp: " + *(query.end() - 2) + "\n")
+                                      .c_str());
+            }
+            else
+            {
+                ImGui::Text("%s", (
+                                      "Transaction ID: " + i.representation() + "\n" +
+                                      "Book Hash: " + i.getUpdatedBookHash() + "\n" +
+                                      "Data Hash: " + i.getUpdatedCertHash() + "\n" +
+                                      "Type: " + "USER CREATE" + "\n" +
+                                      "User ID: " + query[0] + "\n" +
+                                      "Public Key: " + query[2] + "\n" +
+                                      "Ownership ID: " + query[4] + "\n")
+                                      .c_str());
+            }
             ImGui::EndTooltip();
         }
         ImGui::NextColumn();
@@ -85,12 +102,19 @@ void transaction_window()
             ImGui::NextColumn();
             ImGui::Text("%s", "00000000");
         }
-        else
+        else if (query[0] == "DONATE")
         {
             ImGui::NextColumn();
             ImGui::Text("%s", (query[4]).c_str());
             ImGui::NextColumn();
             ImGui::Text("%s", "00000000");
+        }
+        else
+        {
+            ImGui::NextColumn();
+            ImGui::Text("%s", (query[2]).c_str());
+            ImGui::NextColumn();
+            ImGui::Text("%s", (query[2]).c_str());
         }
         ImGui::Separator();
         ImGui::Spacing();

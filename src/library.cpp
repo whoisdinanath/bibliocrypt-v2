@@ -4,12 +4,15 @@ void library_func()
 {
     while (1)
     {
+        // stateVars::show_error = false;
         if (globalVars::exit_flag)
         {
             exit(0);
         }
         globalVars::m_book_data = read_book_data("./assets/book.csv");
         globalVars::m_user_data = read_user_data("./assets/data.csv");
+        std::cout << "Breakpoint 1: Start: "
+                  << "---" << std::endl;
         std::cout << "Transaction Pool: " << Chain::m_transactionPool.size() << std::endl;
 
         time_t now = time(0);
@@ -192,7 +195,7 @@ void library_func()
                 // }
                 std::string book_hash, data_hash;
                 // std::cout << "Getting the hashes..." << std::endl;
-                if (Chain::m_transactionPool.size() == 0 && Chain::BIBLIOCHAIN.getLength() > 1)
+                if (Chain::m_transactionPool.size() == 0 && Chain::BIBLIOCHAIN.getLength() >= 1)
                 {
                     // here we get the last block from the chain
                     // std::cout << "Getting the last block from the chain..." << std::endl;
@@ -237,18 +240,14 @@ void library_func()
 
                 std::cout << "Breakpoint Transaction : Check transaction size." << std::endl;
                 std::cout << "Size" << Chain::m_transactionPool.size() << std::endl;
-                if (Chain::m_transactionPool.size() > 0 || (Chain::m_transactionPool.size() == 0 && Chain::BIBLIOCHAIN.getLength() > 1))
+                if (Chain::m_transactionPool.size() > 0 || (Chain::m_transactionPool.size() == 0 && Chain::BIBLIOCHAIN.getLength() >= 1))
                 {
-                    // std::cout << sha256(_data) << std::endl
-                    //           << sha256(_book) << std::endl;
-                    // std::cout << "Updated Cert Hash: " << Chain::m_transactionPool.back().getUpdatedCertHash() << std::endl;
-                    // std::cout << "Update Book Hash: " << Chain::m_transactionPool.back().getUpdatedBookHash() << std::endl;
-                    // bool flag = Chain::m_transactionPool.back().getUpdatedBookHash() == sha256(_book);
-                    // bool flag2 = Chain::m_transactionPool.back().getUpdatedCertHash() == sha256(_data);
-                    // std::cout << flag << flag2 << std::endl;
-                    // std::cout << (flag && flag2) << std::endl;
+                    std::cout << data_hash << std::endl;
+                    std::cout << book_hash << std::endl;
+                    std::cout << sha256(_data) << std::endl
+                              << sha256(_book) << std::endl;
 
-                    if (((sha256(_data) != data_hash) && (sha256(_book) != book_hash)) && Chain::noNodes > 1)
+                    if (((sha256(_data) != data_hash) || (sha256(_book) != book_hash)) && Chain::noNodes > 1)
                     // if (flag && flag2)
                     {
                         std::cout << "Data has been changed from original one..." << std::endl;
@@ -331,6 +330,7 @@ void library_func()
                             globalVars::j_request = {
                                 {"method", "POST"},
                                 {"query", "add_transaction"},
+                                {"type", "library"},
                                 {"transaction", t1.toJson()},
                             };
                             m_client.sendQuery(globalVars::j_request.dump());
@@ -354,20 +354,25 @@ void library_func()
                         }
                         // globalVars::m_user_data = read_user_data("./assets/data.csv");
                         // globalVars::m_book_data = read_book_data("./assets/book.csv");
-                        std::memset(globalVars::QUERY, 0, sizeof(globalVars::QUERY));
-                        QUERY_STR = "";
                     }
                     else if (QUERY_STR != "")
                     {
+
                         std::cerr << "This is not a valid transaction" << std::endl;
-                        // error_window("Not a valid transaction. ", stateVars::show_error);
+                        stateVars::error_message = "This is not a valid transaction";
+                        stateVars::show_error = true;
                     }
+                    std::memset(globalVars::QUERY, 0, sizeof(globalVars::QUERY));
+                    QUERY_STR = "";
                     // ends here
                 }
                 else if (QUERY_STR != "")
                 {
-                    std::cerr << "Please insert the query in the format descripted below..." << std::endl;
-                    // error_window("Please insert the query in the format descripted below...", stateVars::show_error);
+
+                    std::cerr
+                        << "Please insert the query in the format descripted below..." << std::endl;
+                    stateVars::error_message = "Please insert the query in the format descripted below...";
+                    stateVars::show_error = true;
                 }
 
                 std::cout << "Breakpoint 7: Query: " << QUERY_STR << std::endl;
@@ -375,6 +380,9 @@ void library_func()
             else
             {
                 std::cout << "Smart contract has been tampered with wrong one!" << std::endl;
+                stateVars::error_message = "Smart contract has been tampered with wrong one!\nExiting...";
+                stateVars::show_error = true;
+                sleep(3);
                 std::cout << "Exiting..." << std::endl;
                 exit(1);
             }

@@ -100,6 +100,9 @@ void initGLwindow()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        ImGui::GetStyle().ChildRounding = 10;
+        ImGui::GetStyle().WindowRounding = 10;
+
         // library_func();
 
         // if (show_demo_window)
@@ -157,11 +160,14 @@ void initGLwindow()
             // full screen
             ImGui::SetWindowSize(ImVec2(1280, 720));
             ImGui::SetWindowPos(ImVec2(0, 0));
+            // a rounded border
 
             // child window at the centre of the window
             ImGui::SetCursorPos(ImVec2((ImGui::GetWindowSize().x - 300) / 2, (ImGui::GetWindowSize().y - 200) / 2));
 
             ImGui::BeginChild("Register", ImVec2(300, 200), true, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 10.0f);
+            ImGui::GetStyle().WindowRounding = 10.0f;
 
             // globalVars::BIBLIOCHAIN = std::make_unique<Blockchain>();
             if (ImGui::Button("Back"))
@@ -192,6 +198,30 @@ void initGLwindow()
 
                         globalVars::global_user = std::make_unique<User>(username);
                         std::cout << globalVars::global_user->ID << " User Created..." << std::endl;
+                        // create a transaction for new user creation
+                        std::vector<int> transQ = globalVars::global_user->encoder(globalVars::global_user->ID + "|" + globalVars::global_user->public_key + "|" + globalVars::global_user->public_key + "|" + std::to_string(globalVars::global_user->token) + "|" + globalVars::global_user->ownership_id);
+                        Transaction userTrans = Transaction(transQ);
+                        // add the transaction to the transaction pool
+                        Chain::m_transactionPool.push_back(userTrans);
+                        // add the transaction to the blockchain
+                        if (Chain::noNodes > 1)
+                        {
+                            std::cout << "Post Transaction to other" << std::endl;
+                            TcpClient m_client = TcpClient(globalVars::OTHER_SERVER_IP, globalVars::OTHER_SERVER_PORT);
+                            std::cout << "Post Transaction to other" << std::endl;
+
+                            globalVars::j_request = {
+                                {"method", "POST"},
+                                {"query", "add_transaction"},
+                                {"type", "user"},
+                                {"transaction", userTrans.toJson()},
+                            };
+                            m_client.sendQuery(globalVars::j_request.dump());
+                            globalVars::response = m_client.receiveResponse();
+                            globalVars::j_response = json::parse(globalVars::response);
+                            std::cout << globalVars::j_response["message"].get<std::string>() << std::endl;
+                            m_client.closeClient();
+                        }
                         stateVars::show_secrets_window = true;
                         stateVars::show_register_window = false;
                         std::cout << stateVars::initialNode << std::endl;
@@ -242,6 +272,8 @@ void initGLwindow()
                 stateVars::show_initial_window = false;
                 stateVars::initialNode = false;
             }
+            ImGui::PopStyleVar();
+
             ImGui::EndChild();
 
             ImGui::End();
@@ -432,7 +464,7 @@ void initGLwindow()
         // {
         //     main_window();
         // }
-        if (stateVars::show_books_window)
+        if (stateVars::show_information_window)
         {
             book_window();
         }
