@@ -28,4 +28,6 @@ To get started with BIBLIOCRYPT, please refer to the installation guide and docu
 - Efficient search functionality for quick resource discovery.
 - Borrowing and returning system with automated due date tracking.
 - Robust data storage and retrieval mechanisms.
+- Improved user experience
+- Integration with other system
 

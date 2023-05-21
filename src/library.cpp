@@ -13,7 +13,7 @@ void library_func()
         globalVars::m_user_data = read_user_data("./assets/data.csv");
         std::cout << "Breakpoint 1: Start: "
                   << "---" << std::endl;
-        std::cout << "Transaction Pool: " << Chain::m_transactionPool.size() << std::endl;
+        // std::cout << "Transaction Pool: " << Chain::m_transactionPool.size() << std::endl;
 
         time_t now = time(0);
         std::string timestamp = ctime(&now);
@@ -80,7 +80,7 @@ void library_func()
                     std::cout << "Status" << std::endl;
                     if (globalVars::j_response["status_code"] == "200")
                     {
-                        std::cout << "inside the if" << std::endl;
+                        // std::cout << "inside the if" << std::endl;
                         if (Chain::BIBLIOCHAIN.getLatestBlock().getHash() != tempChain.getLatestBlock().getHash())
                         {
                             Chain::BIBLIOCHAIN.replaceChain(json::parse(blockchain_data));
@@ -135,7 +135,7 @@ void library_func()
                     Chain::m_transactionPool.clear();
 
                     sleep(5);
-                    std::cout << "Block mined successfully!" << std::endl;
+                    // std::cout << "Block mined successfully!" << std::endl;
                 }
             }
             else
@@ -144,7 +144,7 @@ void library_func()
                 // auto start_time = std::chrono::high_resolution_clock::now();
                 while (!Chain::m_transactionPool.size() == 0)
                 {
-                    std::cout << "Waiting for the block to be mined..." << std::endl;
+                    // std::cout << "Waiting for the block to be mined..." << std::endl;
                     sleep(1);
                 }
             }
@@ -156,7 +156,7 @@ void library_func()
             std::string textContract;
             if (!smartContract.is_open())
             {
-                std::cout << "Error opening file" << std::endl;
+                // std::cout << "Error opening file" << std::endl;
                 exit(1);
             }
             std::string line;
@@ -167,7 +167,7 @@ void library_func()
             smartContract.close();
             if (sha256(textContract) == Chain::BIBLIOCHAIN.getBlock(0).getPreviousHash())
             {
-                std::cout << "Smart contract is intact!" << std::endl;
+                // std::cout << "Smart contract is intact!" << std::endl;
                 // if required get the chain
                 globalVars::j_request = {
                     {"method", "GET"},
@@ -218,7 +218,7 @@ void library_func()
                 std::ifstream dataFile("./assets/data.csv");
                 if (!bookFile.is_open() || !dataFile.is_open())
                 {
-                    std::cout << "Error opening file" << std::endl;
+                    // std::cout << "Error opening file" << std::endl;
                     exit(1);
                 }
                 // std::cout << "Reading the files..." << std::endl;
@@ -238,8 +238,8 @@ void library_func()
                 bookFile.close();
                 dataFile.close();
 
-                std::cout << "Breakpoint Transaction : Check transaction size." << std::endl;
-                std::cout << "Size" << Chain::m_transactionPool.size() << std::endl;
+                // std::cout << "Breakpoint Transaction : Check transaction size." << std::endl;
+                // std::cout << "Size" << Chain::m_transactionPool.size() << std::endl;
                 if (Chain::m_transactionPool.size() > 0 || (Chain::m_transactionPool.size() == 0 && Chain::BIBLIOCHAIN.getLength() >= 1))
                 {
                     std::cout << data_hash << std::endl;
@@ -250,7 +250,7 @@ void library_func()
                     if (((sha256(_data) != data_hash) || (sha256(_book) != book_hash)) && Chain::noNodes > 1)
                     // if (flag && flag2)
                     {
-                        std::cout << "Data has been changed from original one..." << std::endl;
+                        // std::cout << "Data has been changed from original one..." << std::endl;
                         globalVars::j_request = {
                             {"method", "GET"},
                             {"query", "get_data"},
@@ -260,7 +260,7 @@ void library_func()
                         m_client.sendQuery(globalVars::j_request.dump());
                         globalVars::response = m_client.receiveResponse();
                         globalVars::j_response = json::parse(globalVars::response);
-                        std::cout << "Data has been updated..." << std::endl;
+                        // std::cout << "Data has been updated..." << std::endl;
                         std::cout << globalVars::j_response << std::endl;
                         std::string user_data = globalVars::j_response["user"].get<std::string>();
                         std::string book_data = globalVars::j_response["book"].get<std::string>();
@@ -288,10 +288,10 @@ void library_func()
                         book_file.close();
                         m_client.closeClient();
                     }
-                    else
-                    {
-                        std::cout << "Data is ok." << std::endl;
-                    }
+                    // else
+                    // {
+                    //     std::cout << "Data is ok." << std::endl;
+                    // }
                 }
                 std::cout << globalVars::QUERY << std::endl;
                 std::string QUERY_STR = globalVars::QUERY;
@@ -300,7 +300,7 @@ void library_func()
                 // starts here
                 if ((QUERY_STR.substr(0, 3) == "GET") | (QUERY_STR.substr(0, 6) == "DONATE") | (QUERY_STR.substr(0, 4) == "GIVE"))
                 {
-                    std::cout << "Breakpoint 5.1: Query: " << QUERY_STR << std::endl;
+                    // std::cout << "Breakpoint 5.1: Query: " << QUERY_STR << std::endl;
                     QUERY_STR += "|" + globalVars::global_user->public_key + "|" + timestamp;
                     std::vector<int> encodedQuery = globalVars::global_user->encoder(QUERY_STR);
                     std::cout << QUERY_STR << std::endl;
