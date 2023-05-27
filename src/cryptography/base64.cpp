@@ -9,6 +9,7 @@
 #include <string_view>
 #include <vector>
 
+// a class to encode and decode base64 strings
 namespace
 {
     std::array<char, 64> constexpr encode_table{'A', 'B', 'C', 'D', 'E', 'F',

@@ -1,4 +1,29 @@
 TITLE,AUTHOR,ISBN,OWNER_ID
-Algorithms,Pearson,978-0262033848,00000000
-Artificial Intelligence: A Modern Approach,Pearson,978-0136042594,00000000
-Clean Code: A Handbook of Agile Software Craftsmanship,Pearson,978-0132350884,00000000
+Introduction to Algorithms,Thomas H. Cormen,978-0262033848,00000000
+The Art of Computer Programming,Donald E. Knuth,978-0321751041,00000000
+The C Programming Language,Brian W. Kernighan,978-0131103627,00000000
+The C++ Programming Language,Bjarne Stroustrup,978-0321563842,00000000
+The Go Programming Language,Alan A. A. Donovan,978-0134190440,00000000
+The Java Programming Language,James Gosling,978-0321349804,00000000
+The Linux Programming Interface,Michael Kerrisk,978-1593272203,00000000
+The Practice of Programming,Brian W. Kernighan,978-0201615869,00000000
+The Pragmatic Programmer,Andrew Hunt,978-0201616224,00000000
+The Unix Programming Environment,Brian W. Kernighan,978-0139376818,00000000
+Compilers: Principles Techniques and Tools, Alfred V. Aho,978-0321486813,00000000
+Computer Networks,Andrew S. Tanenbaum,978-0132126953,00000000
+Computer Organization and Design,David A. Patterson,978-0123747501,00000000
+Computer Systems: A Programmer's Perspective,Randal E. Bryant,978-0136108047,00000000
+Design Patterns,Erich Gamma,978-0201633610,00000000
+Distributed Systems,Maarten van Steen,978-1543057386,00000000
+Elements of Programming Interviews,Adnan Aziz,978-1479274833,00000000
+Foundations of Computer Science,Alfred V. Aho,978-0716782841,00000000
+Fundamentals of Database Systems,Ramez Elmasri,978-0133970777,00000000
+Introduction to the Theory of Computation,Michael Sipser,978-1133187790,00000000
+Modern Operating Systems,Andrew S. Tanenbaum,978-0133591620,00000000
+Operating System Concepts,Abraham Silberschatz,978-1118063330,00000000
+Operating Systems: Three Easy Pieces,Remzi H. Arpaci-Dusseau,978-1985086590,00000000
+Pattern Recognition and Machine Learning,Christopher M. Bishop,978-0387310732,00000000
+The Art of Multiprocessor Programming,Maurice Herlihy,978-0123705914,00000000
+The Design and Implementation of the FreeBSD Operating System,Marshall Kirk McKusick,978-0321968975,00000000
+The Elements of Computing Systems,Noam Nisan,978-0262640688,00000000
+The Elements of Statistical Learning,Trevor Hastie,978-0387848570,00000000

@@ -11,8 +11,8 @@ void library_func()
         }
         globalVars::m_book_data = read_book_data("./assets/book.csv");
         globalVars::m_user_data = read_user_data("./assets/data.csv");
-        std::cout << "Breakpoint 1: Start: "
-                  << "---" << std::endl;
+        // std::cout << "Breakpoint 1: Start: "
+                //   << "---" << std::endl;
         // std::cout << "Transaction Pool: " << Chain::m_transactionPool.size() << std::endl;
 
         time_t now = time(0);
@@ -73,7 +73,7 @@ void library_func()
                     m_client.sendQuery(globalVars::j_request.dump());
                     globalVars::response = m_client.receiveResponse();
                     globalVars::j_response = json::parse(globalVars::response);
-                    std::cout << "Response: " << globalVars::response << std::endl;
+                    // std::cout << "Response: " << globalVars::response << std::endl;
                     std::string blockchain_data = globalVars::j_response["chain"].get<std::string>();
                     Blockchain tempChain(0);
                     tempChain.replaceChain(json::parse(blockchain_data));
@@ -213,7 +213,7 @@ void library_func()
                     book_hash = tempTrans.getUpdatedBookHash();
                     data_hash = tempTrans.getUpdatedCertHash();
                 }
-                std::cout << "Verifying the hashes..." << std::endl;
+                // std::cout << "Verifying the hashes..." << std::endl;
                 std::ifstream bookFile("./assets/book.csv");
                 std::ifstream dataFile("./assets/data.csv");
                 if (!bookFile.is_open() || !dataFile.is_open())
@@ -242,10 +242,10 @@ void library_func()
                 // std::cout << "Size" << Chain::m_transactionPool.size() << std::endl;
                 if (Chain::m_transactionPool.size() > 0 || (Chain::m_transactionPool.size() == 0 && Chain::BIBLIOCHAIN.getLength() >= 1))
                 {
-                    std::cout << data_hash << std::endl;
-                    std::cout << book_hash << std::endl;
-                    std::cout << sha256(_data) << std::endl
-                              << sha256(_book) << std::endl;
+                    // std::cout << data_hash << std::endl;
+                    // std::cout << book_hash << std::endl;
+                    // std::cout << sha256(_data) << std::endl
+                            //   << sha256(_book) << std::endl;
 
                     if (((sha256(_data) != data_hash) || (sha256(_book) != book_hash)) && Chain::noNodes > 1)
                     // if (flag && flag2)
@@ -261,7 +261,7 @@ void library_func()
                         globalVars::response = m_client.receiveResponse();
                         globalVars::j_response = json::parse(globalVars::response);
                         // std::cout << "Data has been updated..." << std::endl;
-                        std::cout << globalVars::j_response << std::endl;
+                        // std::cout << globalVars::j_response << std::endl;
                         std::string user_data = globalVars::j_response["user"].get<std::string>();
                         std::string book_data = globalVars::j_response["book"].get<std::string>();
                         // blockchain data is already in json string format
@@ -293,9 +293,9 @@ void library_func()
                     //     std::cout << "Data is ok." << std::endl;
                     // }
                 }
-                std::cout << globalVars::QUERY << std::endl;
+                // std::cout << globalVars::QUERY << std::endl;
                 std::string QUERY_STR = globalVars::QUERY;
-                std::cout << "Breakpoint 4: Query: " << QUERY_STR << std::endl;
+                // std::cout << "Breakpoint 4: Query: " << QUERY_STR << std::endl;
 
                 // starts here
                 if ((QUERY_STR.substr(0, 3) == "GET") | (QUERY_STR.substr(0, 6) == "DONATE") | (QUERY_STR.substr(0, 4) == "GIVE"))
@@ -303,29 +303,26 @@ void library_func()
                     // std::cout << "Breakpoint 5.1: Query: " << QUERY_STR << std::endl;
                     QUERY_STR += "|" + globalVars::global_user->public_key + "|" + timestamp;
                     std::vector<int> encodedQuery = globalVars::global_user->encoder(QUERY_STR);
-                    std::cout << QUERY_STR << std::endl;
-                    for (auto res : encodedQuery)
-                    {
-                        std::cout << res;
-                    }
-                    std::cout << std::endl;
+                    // std::cout << QUERY_STR << std::endl;
+
+                    // std::cout << std::endl;
                     std::vector<std::string> decrypted = SmartContract::getqueryfromenc(encodedQuery);
-                    std::cout << "Breakpoint 5.3: Decrypted Query: " << decrypted[0] << std::endl;
+                    // std::cout << "Breakpoint 5.3: Decrypted Query: " << decrypted[0] << std::endl;
                     bool isvalid = SmartContract::validate_trans(decrypted);
-                    std::cout << "isvalid: " << isvalid << std::endl;
-                    std::cout << "TRANSACTION: " << QUERY_STR << std::endl;
+                    // std::cout << "isvalid: " << isvalid << std::endl;
+                    // std::cout << "TRANSACTION: " << QUERY_STR << std::endl;
                     if (isvalid)
                     {
-                        std::cout << "Is Valid" << std::endl;
+                        // std::cout << "Is Valid" << std::endl;
                         SmartContract::update_files(decrypted);
                         Transaction t1{encodedQuery};
-                        std::cout << t1.toJson().dump() << std::endl;
+                        // std::cout << t1.toJson().dump() << std::endl;
                         Chain::m_transactionPool.push_back(t1);
                         if (Chain::noNodes > 1)
                         {
-                            std::cout << "Post Transaction to other" << std::endl;
+                            // std::cout << "Post Transaction to other" << std::endl;
                             TcpClient m_client = TcpClient(globalVars::OTHER_SERVER_IP, globalVars::OTHER_SERVER_PORT);
-                            std::cout << "Post Transaction to other" << std::endl;
+                            // std::cout << "Post Transaction to other" << std::endl;
 
                             globalVars::j_request = {
                                 {"method", "POST"},
@@ -336,7 +333,7 @@ void library_func()
                             m_client.sendQuery(globalVars::j_request.dump());
                             globalVars::response = m_client.receiveResponse();
                             globalVars::j_response = json::parse(globalVars::response);
-                            std::cout << globalVars::j_response["message"].get<std::string>() << std::endl;
+                            // std::cout << globalVars::j_response["message"].get<std::string>() << std::endl;
 
                             // ifstream data_file("./assets/data.csv"), book_file("./assets/book.csv");
                             // if (!data_file.is_open() || !book_file.is_open())
@@ -375,15 +372,15 @@ void library_func()
                     stateVars::show_error = true;
                 }
 
-                std::cout << "Breakpoint 7: Query: " << QUERY_STR << std::endl;
+                // std::cout << "Breakpoint 7: Query: " << QUERY_STR << std::endl;
             }
             else
             {
-                std::cout << "Smart contract has been tampered with wrong one!" << std::endl;
+                // std::cout << "Smart contract has been tampered with wrong one!" << std::endl;
                 stateVars::error_message = "Smart contract has been tampered with wrong one!\nExiting...";
                 stateVars::show_error = true;
                 sleep(3);
-                std::cout << "Exiting..." << std::endl;
+                // std::cout << "Exiting..." << std::endl;
                 exit(1);
             }
         }

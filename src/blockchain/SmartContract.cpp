@@ -37,38 +37,34 @@ bool SmartContract::isISBNValid(const std::string &isbn)
 
 vector<string> SmartContract::getqueryfromenc(vector<int> x)
 {
-    std::cout << "Breaking the encryption..." << std::endl;
+    // std::cout << "Breaking the encryption..." << std::endl;
     vector<CryptSource> c1 = getdatac();
 
     for (CryptSource c : c1)
     {
-        std::cout << "Inside the loop..." << std::endl;
+        // std::cout << "Inside the loop..." << std::endl;
 
         string msg = f_decrypted(x, c.public_key);
-        std::cout << c.public_key << std::endl;
-        std::cout << "Decrypted message: " << msg << std::endl;
+        // std::cout << c.public_key << std::endl;
+        // std::cout << "Decrypted message: " << msg << std::endl;
         if (msg.find(c.public_key) != string::npos)
         {
-            std::cout << "Found the public key..." << std::endl;
+            // std::cout << "Found the public key..." << std::endl;
 
             stringstream s_str(msg);
             vector<string> result;
             while (s_str.good())
             {
-                std::cout << "decrypting the query..." << std::endl;
+                // std::cout << "decrypting the query..." << std::endl;
                 string substr;
                 getline(s_str, substr, '|');
                 result.push_back(substr);
-                std::cout << substr << std::endl;
+                // std::cout << substr << std::endl;
             }
 
             result.push_back(c.public_key);
 
-            std::cout << "Decrypted query: " << std::endl;
-            for (auto i : result)
-            {
-                std::cout << i << std::endl;
-            }
+
             return result;
         }
     }
@@ -85,29 +81,29 @@ bool SmartContract::validate_trans(vector<string> decryptedd)
     if (decryptedd[0] == "GET")
     {
         // print debug points and respective values
-        std::cout << "Inside the GET..." << std::endl;
-        std::cout << "decryptedd[4]: " << decryptedd[4] << std::endl;
+        // std::cout << "Inside the GET..." << std::endl;
+        // std::cout << "decryptedd[4]: " << decryptedd[4] << std::endl;
         for (auto k : c1)
         {
-            std::cout << "Inside the loop..." << std::endl;
-            std::cout << "k.public_key: " << k.public_key << std::endl;
+            // std::cout << "Inside the loop..." << std::endl;
+            // std::cout << "k.public_key: " << k.public_key << std::endl;
             if (k.public_key == decryptedd[4] && k.token >= 1)
             {
-                std::cout << "Inside the if..." << std::endl;
-                std::cout << "k.public_key: " << k.public_key << std::endl;
+                // std::cout << "Inside the if..." << std::endl;
+                // std::cout << "k.public_key: " << k.public_key << std::endl;
                 first = true;
             }
         }
         for (auto p : b1)
         {
-            std::cout << "Inside the loop..." << std::endl;
-            std::cout << "p.isbn: " << p.isbn << std::endl;
-            std::cout << "p.isbn: " << decryptedd[1] << std::endl;
-            std::cout << "p.ownership: " << (p.ownership) << std::endl;
+            // std::cout << "Inside the loop..." << std::endl;
+            // std::cout << "p.isbn: " << p.isbn << std::endl;
+            // std::cout << "p.isbn: " << decryptedd[1] << std::endl;
+            // std::cout << "p.ownership: " << (p.ownership) << std::endl;
             if (p.isbn == decryptedd[1] && p.ownership == "00000000")
             {
-                std::cout << "Inside the if..." << std::endl;
-                std::cout << "p.isbn: " << p.isbn << std::endl;
+                // std::cout << "Inside the if..." << std::endl;
+                // std::cout << "p.isbn: " << p.isbn << std::endl;
                 second = true;
             }
         }
@@ -117,13 +113,13 @@ bool SmartContract::validate_trans(vector<string> decryptedd)
 
         for (auto p : b1)
         {
-            std::cout << "Inside the loop..." << std::endl;
-            std::cout << "p.isbn: " << p.isbn << std::endl;
+            // std::cout << "Inside the loop..." << std::endl;
+            // std::cout << "p.isbn: " << p.isbn << std::endl;
             if (p.isbn == decryptedd[1] && p.ownership == sha256(decryptedd[4]))
             {
-                std::cout << "Inside the if..." << std::endl;
-                std::cout << "p.isbn: " << p.isbn << std::endl;
-                std::cout << "p.ownership: " << p.ownership << std::endl;
+                // std::cout << "Inside the if..." << std::endl;
+                // std::cout << "p.isbn: " << p.isbn << std::endl;
+                // std::cout << "p.ownership: " << p.ownership << std::endl;
                 first = true;
                 second = true;
             }

@@ -35,11 +35,11 @@ void library_window()
     ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize("Submit").x) / 2);
     if (ImGui::Button("Submit"))
     {
-        std::cout << "BUF: " << buf << std::endl;
+        // std::cout << "BUF: " << buf << std::endl;
         strcpy(globalVars::QUERY, buf);
         std::cout << "QUERY: " << globalVars::QUERY << std::endl;
         memset(buf, 0, sizeof(buf));
-        std::cout << "BUF: " << buf << std::endl;
+        // std::cout << "BUF: " << buf << std::endl;
     }
     spaceSection(3);
 

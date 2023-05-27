@@ -141,7 +141,7 @@ void TcpClient::sendQuery(std::string query)
     sentBytes = strlen(m_query.std::string::c_str());
     if (write(m_socket, m_query.std::string::c_str(), sentBytes) != sentBytes)
         std::cout << strerror(errno) << std::endl;
-    std::cout << "Query Sent Successfully!" << std::endl;
+    // std::cout << "Query Sent Successfully!" << std::endl;
 }
 
 // void TcpClient::sendQuery(std::string query)
@@ -170,7 +170,7 @@ std::string TcpClient::receiveResponse()
     m_incomingMessage = "";
     while ((receivedBytes = read(m_socket, buffer, BUFFER_SIZE)) > 0)
     {
-        std::cout << buffer << std::endl;
+        // std::cout << buffer << std::endl;
         buffer[receivedBytes] = '\0';
         m_incomingMessage += buffer;
     }
@@ -217,7 +217,7 @@ std::string TcpClient::receiveResponse()
 
 void TcpClient::printResponse()
 {
-    std::cout << m_incomingMessage << std::endl;
+    // std::cout << m_incomingMessage << std::endl;
 }
 
 void TcpClient::closeClient()

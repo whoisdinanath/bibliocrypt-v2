@@ -1,22 +1,62 @@
+DONATE|978-0136042594|Artificial Intelligence: A Modern Approach|Stuart Russell
+DONATE|978-0132350884|Clean Code: A Handbook of Agile Software Craftsmanship|Robert C. Martin
+DONATE|978-0735619678|Code Complete: A Practical Handbook of Software Construction|Steve McConnell
+DONATE|978-0321486813|Compilers: Principles, Techniques, and Tools|Alfred V. Aho
+DONATE|978-0132126953|Computer Networks|Larry L. Peterson
+DONATE|978-0124077263|Computer Organization and Design: The Hardware/Software Interface|David A. Patterson
+DONATE|978-0134092669|Computer Systems: A Programmer's Perspective|Randal E. Bryant
+DONATE|978-0201633610|Design Patterns: Elements of Reusable Object-Oriented Software|Erich Gamma
+DONATE|978-0073383095|Discrete Mathematics and Its Applications|Kenneth H. Rosen
+DONATE|978-0262033848|Introduction to Algorithms|Thomas H. Cormen
+DONATE|978-1133187790|Introduction to the Theory of Computation|Michael Sipser
+DONATE|978-1118063330|Operating System Concepts|Abraham Silberschatz
+DONATE|978-0133805918|Operating Systems: Internals and Design Principles|William Stallings
+DONATE|978-0123749574|Principles of Computer System Design|Jerome H. Saltzer
+DONATE|978-0131103627|The C Programming Language|Dennis M. Ritchie
+DONATE|978-0321563842|The C++ Programming Language|Bjarne Stroustrup
+DONATE|978-0262640688|The Elements of Computing Systems|Noam Nisan
+DONATE|978-0262033848|Introduction to Algorithms|Thomas H. Cormen
+DONATE|978-1133187790|Introduction to the Theory of Computation|Michael Sipser
+DONATE|978-1118063330|Operating System Concepts|Abraham Silberschatz
 
-DONATE|978-1-60309-454-2|Computer-Network|Pearson
-DONATE|978-1-60309-038-4|Priya-Sufi|Subin-Neupane
-DONATE|978-1-60309-505-1|Mathematics|SP-Shrestha
-DONATE|978-1-60309-502-0|HelloWorld|SK-Singh
-DONATE|978-1-60309-492-4|Computer-Architecture|LM-Bhatt
-DONATE|978-1-60309-513-6|Compiler-Design|SK-Singh
 
-GET|978-1-60309-454-2
-GET|978-1-60309-505-1
-GET|978-1-60309-038-4
-GET|978-1-60309-492-4
-GET|978-1-60309-513-6
-GET|978-1-60309-502-0
 
-GIVE|978-1-60309-454-2
-GIVE|978-1-60309-038-4
-GIVE|978-1-60309-505-1
-GIVE|978-1-60309-502-0
-GIVE|978-1-60309-492-4
-GIVE|978-1-60309-513-6
+GET|978-0136042594
+GET|978-0132350884
+GET|978-0735619678
+GET|978-0321486813
+GET|978-0132126953
+GET|978-0124077263
+GET|978-0134092669
+GET|978-0201633610
+GET|978-0073383095
+GET|978-0262033848
+GET|978-1133187790
+GET|978-1118063330
+GET|978-0133805918
+GET|978-0123749574
+GET|978-0131103627
+GET|978-0321563842
+GET|978-0262640688
+
+GIVE|978-0136042594
+GIVE|978-0132350884
+GIVE|978-0735619678
+GIVE|978-0321486813
+GIVE|978-0132126953
+GIVE|978-0124077263
+GIVE|978-0134092669
+GIVE|978-0201633610
+GIVE|978-0073383095
+GIVE|978-0262033848
+GIVE|978-1133187790
+GIVE|978-1118063330
+GIVE|978-0133805918
+GIVE|978-0123749574
+GIVE|978-0131103627
+GIVE|978-0321563842
+GIVE|978-0262640688
+GIVE|978-0262033848
+GIVE|978-1133187790
+GIVE|978-1118063330
 

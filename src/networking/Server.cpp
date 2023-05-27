@@ -137,19 +137,19 @@ void TcpServer::buildResponse(std::string request)
     book_file.open("assets/book.csv", std::ios::in | std::ios::out);
     user_file.open("assets/data.csv", std::ios::in | std::ios::out);
     // request is in json format
-    std::cout << request << std::endl;
-    std::cout << "request recieved" << std::endl;
+    // std::cout << request << std::endl;
+    // std::cout << "request recieved" << std::endl;
     request_json = json::parse(request);
-    std::cout << "request parsed" << std::endl;
+    // std::cout << "request parsed" << std::endl;
     if (request_json["method"].get<std::string>() == "GET")
     {
-        std::cout << "request method is GET" << std::endl;
-        std::cout << "request query is " << request_json["query"].get<std::string>() << std::endl;
+        // std::cout << "request method is GET" << std::endl;
+        // std::cout << "request query is " << request_json["query"].get<std::string>() << std::endl;
         if (request_json["query"].get<std::string>() == "get_data")
         {
-            std::cout << "request query is get_data" << std::endl;
+            // std::cout << "request query is get_data" << std::endl;
             response_json["status_code"] = "200";
-            std::cout << "status code set" << std::endl;
+            // std::cout << "status code set" << std::endl;
             ss_response << user_file.rdbuf();
             response_json["user"] = ss_response.str();
             ss_response.str("");
@@ -159,30 +159,30 @@ void TcpServer::buildResponse(std::string request)
             response_json["chain"] = Chain::BIBLIOCHAIN.toJsonStr();
 
             // std::cout << "response is " << response << std::endl;
-            std::cout << request_json["data"][1] << std::endl;
+            // std::cout << request_json["data"][1] << std::endl;
             // std::cout << request_json["data"][2] << std::endl;
             bool is_new_node = bool(request_json["data"][1]);
 
             if (is_new_node)
             {
-                std::cout << "new node" << std::endl;
+                // std::cout << "new node" << std::endl;
                 Chain::noNodes++;
                 response_json["noNodes"] = Chain::noNodes;
-                std::cout << Chain::noNodes << std::endl;
+                // std::cout << Chain::noNodes << std::endl;
             }
             response = response_json.dump();
         }
 
         else if (request_json["query"].get<std::string>() == "get_pool")
         {
-            std::cout << "request query is get_pool" << std::endl;
+            // std::cout << "request query is get_pool" << std::endl;
             if (!Chain::m_transactionPool.empty())
             {
-                std::cout << "pool is not empty" << std::endl;
+                // std::cout << "pool is not empty" << std::endl;
                 json j_temp = json::array();
                 for (auto i : Chain::m_transactionPool)
                 {
-                    std::cout << i.toJson() << std::endl;
+                    // std::cout << i.toJson() << std::endl;
                     j_temp.push_back(i.toJson());
                 }
                 response_json["status_code"] = "200";
@@ -191,20 +191,20 @@ void TcpServer::buildResponse(std::string request)
             }
             else
             {
-                std::cout << "pool is empty" << std::endl;
+                // std::cout << "pool is empty" << std::endl;
                 response_json["status_code"] = "101";
                 response_json["message"] = "No transactions in pool";
-                std::cout << "response is " << response << std::endl;
+                // std::cout << "response is " << response << std::endl;
                 response = response_json.dump();
             }
         }
 
         else if (request_json["query"].get<std::string>() == "get_chain")
         {
-            std::cout << "request query is get_chain" << std::endl;
+            // std::cout << "request query is get_chain" << std::endl;
             response_json["status_code"] = "200";
             response_json["chain"] = Chain::BIBLIOCHAIN.toJsonStr();
-            std::cout << "chain is " << Chain::BIBLIOCHAIN.toJsonStr() << std::endl;
+            // std::cout << "chain is " << Chain::BIBLIOCHAIN.toJsonStr() << std::endl;
             response = response_json.dump();
         }
     }
@@ -225,7 +225,7 @@ void TcpServer::buildResponse(std::string request)
         {
             if (request_json["type"].get<std::string>() == "library")
             {
-                std::cout << "Query Recieved" << std::endl;
+                // std::cout << "Query Recieved" << std::endl;
                 Transaction transaction = Transaction(request_json["transaction"]);
                 Chain::m_transactionPool.push_back(transaction);
                 std::vector<int> encodedQuery = transaction.getEncodedQuery();
@@ -237,7 +237,7 @@ void TcpServer::buildResponse(std::string request)
             }
             else if (request_json["type"].get<std::string>() == "user")
             {
-                std::cout << "Query Recieved" << std::endl;
+                // std::cout << "Query Recieved" << std::endl;
                 Transaction transaction = Transaction(request_json["transaction"]);
                 Chain::m_transactionPool.push_back(transaction);
 
@@ -267,7 +267,7 @@ void TcpServer::buildResponse(std::string request)
             {
 
                 json user = request_json["user"];
-                std::cout << user["ID"].get<std::string>() << "," << user["private_key"].get<std::string>() << "," << user["public_key"].get<std::string>() << "," << user["token"].get<int>() << "," << user["ownership_id"].get<std::string>() << std::endl;
+                // std::cout << user["ID"].get<std::string>() << "," << user["private_key"].get<std::string>() << "," << user["public_key"].get<std::string>() << "," << user["token"].get<int>() << "," << user["ownership_id"].get<std::string>() << std::endl;
                 user_file << user["ID"].get<std::string>() << "," << user["private_key"].get<std::string>() << "," << user["public_key"].get<std::string>() << "," << user["token"].get<int>() << "," << user["ownership_id"].get<std::string>() << std::endl;
 
                 response_json["status_code"] = "555";
@@ -279,9 +279,9 @@ void TcpServer::buildResponse(std::string request)
             user_file.close();
         }
     }
-    std::cout << "response is " << response << std::endl;
+    // std::cout << "response is " << response << std::endl;
     m_serverMessage = response;
-    std::cout << "response set" << std::endl;
+    // std::cout << "response set" << std::endl;
     book_file.close();
     user_file.close();
 }
